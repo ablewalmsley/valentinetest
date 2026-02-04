@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Will You Be My Valentine?</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="card">
+      <header class="header">
+        <p class="eyebrow">A very important question</p>
+        <h1>Will you be my Valentine?</h1>
+        <p class="sub">I made this just for you.</p>
+      </header>
+
+      <section class="photo-wrap" aria-live="polite">
+        <div class="icon-dance" aria-hidden="true">
+          <img class="icon" alt="Sammy the dog" src="sammy.png" />
+          <img
+            class="icon heart"
+            alt="Heart icon"
+            src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><path d='M32 54s-3.4-2.6-7.7-6.1C17.6 42.1 10 35.5 10 26.8 10 20.7 14.6 16 20.7 16c4 0 7.7 2.1 9.7 5.4C32.4 18.1 36.1 16 40.1 16 46.2 16 50.8 20.7 50.8 26.8c0 8.7-7.6 15.3-14.3 21.1C35.4 51.4 32 54 32 54z' fill='%23f05474'/></svg>"
+          />
+          <img class="icon" alt="Daisy the rabbit" src="daisy.png" />
+          <img
+            class="icon heart"
+            alt="Heart icon"
+            src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><path d='M32 54s-3.4-2.6-7.7-6.1C17.6 42.1 10 35.5 10 26.8 10 20.7 14.6 16 20.7 16c4 0 7.7 2.1 9.7 5.4C32.4 18.1 36.1 16 40.1 16 46.2 16 50.8 20.7 50.8 26.8c0 8.7-7.6 15.3-14.3 21.1C35.4 51.4 32 54 32 54z' fill='%23f05474'/></svg>"
+          />
+          <img class="icon" alt="Sammy the dog" src="sammy.png" />
+          <img
+            class="icon heart"
+            alt="Heart icon"
+            src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><path d='M32 54s-3.4-2.6-7.7-6.1C17.6 42.1 10 35.5 10 26.8 10 20.7 14.6 16 20.7 16c4 0 7.7 2.1 9.7 5.4C32.4 18.1 36.1 16 40.1 16 46.2 16 50.8 20.7 50.8 26.8c0 8.7-7.6 15.3-14.3 21.1C35.4 51.4 32 54 32 54z' fill='%23f05474'/></svg>"
+          />
+          <img class="icon" alt="Daisy the rabbit" src="daisy.png" />
+        </div>
+        <img
+          id="heroPhoto"
+          class="hero-photo"
+          src="img-3791.jpg"
+          alt="Holding flowers in a field"
+        />
+        <div class="photo-overlay" id="photoOverlay">Please say yes</div>
+      </section>
+
+      <section class="message" id="message" aria-live="polite">
+        <p>
+          Take your time... but choose wisely. I should do look like a real sweet heart here.
+        </p>
+      </section>
+
+      <section class="actions">
+        <button id="yesBtn" class="btn yes">Yes</button>
+        <button id="noBtn" class="btn no">No</button>
+      </section>
+    </main>
+
+    <div class="snake-overlay" id="snakeOverlay" hidden>
+      <div class="snake-card">
+        <div class="snake-header">
+          <p class="snake-title">Snake Challenge</p>
+          <p class="snake-score">
+            Collected: <span id="snakeScore">0</span>/20
+          </p>
+        </div>
+        <canvas id="snakeCanvas" width="520" height="520" aria-label="Snake game"></canvas>
+        <p class="snake-hint">Use arrow keys or WASD to move.</p>
+      </div>
+      <div class="snake-fail" id="snakeFail" hidden>
+        <div class="snake-fail-card">
+          <h3>You failed.</h3>
+          <p>Press continue to try again.</p>
+          <button id="snakeRetry" class="btn yes">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="crossword-overlay" id="crosswordOverlay" hidden>
+      <div class="crossword-card">
+        <div class="crossword-header">
+          <p class="crossword-title">Mini Crossword</p>
+          <p class="crossword-subtitle">test your knowledge of 67 Brookfield!</p>
+        </div>
+        <div id="crosswordGrid" class="crossword-grid" role="grid" aria-label="Crossword grid"></div>
+        <div class="crossword-actions">
+          <button id="crosswordCheck" class="btn yes">Check</button>
+          <p id="crosswordFeedback" class="crossword-feedback">Dummy clues for now.</p>
+        </div>
+        <div class="crossword-clues">
+          <div>
+            <h3>Across</h3>
+            <ol id="crosswordAcross"></ol>
+          </div>
+          <div>
+            <h3>Down</h3>
+            <ol id="crosswordDown"></ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage-prompt" id="stagePrompt" hidden>
+      <div class="stage-prompt-card">
+        <p class="stage-prompt-text" id="stagePromptText"></p>
+        <button id="stagePromptButton" class="btn yes">I'm ready</button>
+      </div>
+    </div>
+
+    <div class="congrats" id="congrats" hidden>
+      <div class="congrats-card">
+        <p class="congrats-eyebrow">One Last Choice</p>
+        <h2>Pick Our Date Idea</h2>
+        <p class="congrats-subtitle">Tap one to lock it in.</p>
+        <div class="date-grid" id="dateGrid">
+          <button class="date-option" type="button" aria-pressed="false">
+            <img
+              src="https://images.unsplash.com/photo-1762541693135-fb989de961e1?auto=format&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;ixlib=rb-4.1.0&amp;q=70&amp;w=1200"
+              alt="Movie theater seats"
+            />
+            <span>Watch Send Help at the Movie Theaters</span>
+          </button>
+          <button class="date-option" type="button" aria-pressed="false">
+            <img
+              src="https://images.pexels.com/photos/6337032/pexels-photo-6337032.jpeg?cs=srgb&amp;dl=pexels-tima-miroshnichenko-6337032.jpg&amp;fm=jpg"
+              alt="Couple watching a movie at home"
+            />
+            <span>Watch a Rom-Com or Play Video Games at Home</span>
+          </button>
+          <button class="date-option" type="button" aria-pressed="false">
+            <img
+              src="https://images.pexels.com/photos/14072136/pexels-photo-14072136.jpeg?cs=srgb&amp;dl=pexels-airamdphoto-14072136.jpg&amp;fm=jpg"
+              alt="Axe in a target"
+            />
+            <span>Axe Throwing</span>
+          </button>
+          <button class="date-option" type="button" aria-pressed="false">
+            <img
+              src="https://images.unsplash.com/photo-1757584736899-522cc391ae5f?auto=format&amp;fit=crop&amp;fm=jpg&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;ixlib=rb-4.1.0&amp;q=70&amp;w=1200"
+              alt="Arcade entrance with neon signs"
+            />
+            <span>Arcade</span>
+          </button>
+          <button class="date-option" type="button" aria-pressed="false">
+            <img
+              src="https://images.pexels.com/photos/34010578/pexels-photo-34010578.jpeg?cs=srgb&amp;dl=pexels-stefania-loghin-549211407-34010578.jpg&amp;fm=jpg"
+              alt="Outdoor Greek dining patio"
+            />
+            <span>Dinner at Mamakas</span>
+          </button>
+          <button class="date-option" type="button" aria-pressed="false">
+            <img
+              src="https://images.pexels.com/photos/32944669/pexels-photo-32944669.jpeg?cs=srgb&amp;dl=pexels-jkreat0r-32944669.jpg&amp;fm=jpg"
+              alt="Sushi plate"
+            />
+            <span>Dinner at Sushi Momo</span>
+          </button>
+        </div>
+        <p class="date-message" id="dateMessage" hidden>
+          You have picked your date location with me! (Please screenshot your answer though, I didn't have time to program in recording your answer)
+        </p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
