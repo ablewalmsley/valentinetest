@@ -380,7 +380,7 @@ function startSnitchGame() {
   snitch.appendChild(snitchLabel);
   gameLayer.appendChild(snitch);
 
-  const noButtonCount = 250;
+  const noButtonCount = 120;
   for (let i = 0; i < noButtonCount; i += 1) {
     const noFly = document.createElement("button");
     noFly.className = "flying-no";
@@ -404,7 +404,7 @@ function setupMovers() {
     const size = Math.max(rect.width, rect.height);
     const maxX = window.innerWidth - size;
     const maxY = window.innerHeight - size;
-    const speedBase = el.classList.contains("snitch") ? 10 : 1.7;
+    const speedBase = el.classList.contains("snitch") ? 5 : 1.7;
     const vx = (Math.random() * 2 - 1) * speedBase;
     const vy = (Math.random() * 2 - 1) * speedBase;
     return {
