@@ -128,6 +128,7 @@ let score = 0;
 let gridCount = 16;
 let tileSize = 24;
 let snakeTimer = null;
+let snakeTouchStart = null;
 
 const crosswordCells = new Map();
 let crosswordInputs = [];
@@ -359,6 +360,54 @@ function handleSnakeKey(event) {
 
 window.addEventListener("keydown", handleSnakeKey);
 
+function handleSnakeTouchStart(event) {
+  if (stage !== "snake") return;
+  if (!event.touches || event.touches.length === 0) return;
+  const touch = event.touches[0];
+  snakeTouchStart = { x: touch.clientX, y: touch.clientY };
+  event.preventDefault();
+}
+
+function handleSnakeTouchMove(event) {
+  if (stage !== "snake" || !snakeTouchStart) return;
+  if (!event.touches || event.touches.length === 0) return;
+
+  const touch = event.touches[0];
+  const dx = touch.clientX - snakeTouchStart.x;
+  const dy = touch.clientY - snakeTouchStart.y;
+  const absX = Math.abs(dx);
+  const absY = Math.abs(dy);
+  const threshold = 24;
+
+  if (absX < threshold && absY < threshold) return;
+
+  let next = null;
+  if (absX > absY) {
+    next = dx > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 };
+  } else {
+    next = dy > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 };
+  }
+
+  if (next && !(direction.x + next.x === 0 && direction.y + next.y === 0)) {
+    nextDirection = next;
+    snakeTouchStart = { x: touch.clientX, y: touch.clientY };
+  }
+
+  event.preventDefault();
+}
+
+function handleSnakeTouchEnd() {
+  snakeTouchStart = null;
+}
+
+snakeOverlay.addEventListener("touchstart", handleSnakeTouchStart, {
+  passive: false,
+});
+snakeOverlay.addEventListener("touchmove", handleSnakeTouchMove, {
+  passive: false,
+});
+snakeOverlay.addEventListener("touchend", handleSnakeTouchEnd);
+
 function startSnitchGame() {
   stage = "snitch";
   document.body.classList.add("snitch-mode");
@@ -380,7 +429,7 @@ function startSnitchGame() {
   snitch.appendChild(snitchLabel);
   gameLayer.appendChild(snitch);
 
-  const noButtonCount = 120;
+  const noButtonCount = 250;
   for (let i = 0; i < noButtonCount; i += 1) {
     const noFly = document.createElement("button");
     noFly.className = "flying-no";
@@ -404,7 +453,7 @@ function setupMovers() {
     const size = Math.max(rect.width, rect.height);
     const maxX = window.innerWidth - size;
     const maxY = window.innerHeight - size;
-    const speedBase = el.classList.contains("snitch") ? 5 : 1.7;
+    const speedBase = el.classList.contains("snitch") ? 10 : 1.7;
     const vx = (Math.random() * 2 - 1) * speedBase;
     const vy = (Math.random() * 2 - 1) * speedBase;
     return {
