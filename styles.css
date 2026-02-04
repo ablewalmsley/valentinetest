@@ -233,6 +233,7 @@ h1 {
   display: grid;
   place-items: center;
   z-index: 9;
+  touch-action: none;
 }
 
 .snake-overlay[hidden] {
